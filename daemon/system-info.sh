@@ -149,13 +149,13 @@ if [ "${CONTAINER}" = "unknown" ]; then
   done
 else
   # Otherwise try and use a user-supplied bind-mount into the container to resolve the host details
-  if [ -e "/host/etc/os-release" ]; then
+  if [ -e "/etc/os-release" ]; then
     OS_DETECTION="/etc/os-release"
-    eval "$(grep -E "^(NAME|ID|ID_LIKE|VERSION|VERSION_ID)=" < /host/etc/os-release | sed 's/^/HOST_/')"
-    HOST_OS_DETECTION="/host/etc/os-release"
+    eval "$(grep -E "^(NAME|ID|ID_LIKE|VERSION|VERSION_ID)=" < /etc/os-release | sed 's/^/HOST_/')"
+    HOST_OS_DETECTION="/etc/os-release"
   fi
   if [ "${HOST_NAME}" = "unknown" ] || [ "${HOST_VERSION}" = "unknown" ] || [ "${HOST_ID}" = "unknown" ]; then
-    if [ -f "/host/etc/lsb-release" ]; then
+    if [ -f "/etc/lsb-release" ]; then
       if [ "${HOST_OS_DETECTION}" = "unknown" ]; then
         HOST_OS_DETECTION="/etc/lsb-release"
       else
